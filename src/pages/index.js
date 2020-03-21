@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { Heading } from "grommet"
 
-import Layout from "../components/Layout"
+import Layout from "../components/layout.js"
 import SEO from "../components/seo"
 
 const IndexPage = () => (

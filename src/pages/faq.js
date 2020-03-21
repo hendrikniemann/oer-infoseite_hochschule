@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Layout from "../components/Layout"
+import Layout from "../components/layout.js"
 import SEO from "../components/seo"
 import { Heading } from "grommet"
 

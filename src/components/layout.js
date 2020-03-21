@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Grommet, Footer } from "grommet"
 import { Reset } from "styled-reset"
 
-import Header from "./Header"
+import Header from "./header.js"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
