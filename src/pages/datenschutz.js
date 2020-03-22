@@ -5,14 +5,14 @@ import SEO from "../components/seo"
 import { Heading, Box } from "grommet"
 import { MaxWidth } from "../components/util"
 
-const Faq = () => {
+const Datenschutz = () => {
   // const data = useStaticQuery(graphql`
 
   // `)
 
   return (
     <Layout>
-      <SEO title="FAQ" />
+      <SEO title="Datenschutz" />
       <Box align="center">
         <MaxWidth
           maxWidth={800}
@@ -24,7 +24,7 @@ const Faq = () => {
           margin={{ top: "-40px" }}
         >
           <Box>
-            <Heading>FAQ</Heading>
+            <Heading>Datenschutz</Heading>
           </Box>
         </MaxWidth>
       </Box>
@@ -32,4 +32,4 @@ const Faq = () => {
   )
 }
 
-export default Faq
+export default Datenschutz

@@ -9,9 +9,11 @@ import {
   FormField,
   RadioButtonGroup,
   Select,
+  Box,
 } from "grommet"
 import Layout from "../components/layout.js"
 import SEO from "../components/seo"
+import { MaxWidth } from "../components/util"
 
 const subjectAreaOptions = ["Informatik", "Mathematik"]
 const studyPhaseOptions = ["Brückenkurs", "Bachelor", "Master"]
@@ -148,7 +150,21 @@ const Suggest = () => {
   return (
     <Layout>
       <SEO title="Inhalt vorschlagen" />
-      <Heading>Inhalt vorschlagen</Heading>
+      <Box align="center">
+        <MaxWidth
+          maxWidth={800}
+          pad="medium"
+          direction="row"
+          justify="center"
+          background="white"
+          style={{ borderRadius: 6 }}
+          margin={{ top: "-40px" }}
+        >
+          <Box>
+            <Heading>Inhalt Vorschlagen</Heading>
+          </Box>
+        </MaxWidth>
+      </Box>
       {mainData === null ? (
         <MainDataForm setMainData={setMainData} />
       ) : (
