@@ -1,10 +1,11 @@
 import * as React from "react"
-import { Box, Heading, Main, Text, Button } from "grommet"
+import { Box, Heading, Main, Text, Button, CheckBox } from "grommet"
 import {
   RefinementList,
   InstantSearch,
   Hits,
   SearchBox,
+  connectRefinementList,
 } from "react-instantsearch-dom"
 import algoliasearch from "algoliasearch/lite"
 import Layout from "../components/layout"
@@ -21,9 +22,9 @@ export default function Search() {
       <Main>
         <InstantSearch indexName="offers" searchClient={searchClient}>
           <div hidden={!isFirstPage}>
-            <Heading>Mein Fachgebiet ist:</Heading>
-            <Heading>Und ich interessiere mich für:</Heading>
-            <Heading>Mein Kurs-Niveau ist:</Heading>
+            <Heading size="small">Mein Fachgebiet ist:</Heading>
+            <CustomRefinementList attribute="subjectArea" />
+            <Heading size="small">Und ich interessiere mich für:</Heading>
             <Button primary onClick={() => setIsFirstPage(false)}>
               alle Ressourcen
             </Button>
@@ -34,6 +35,8 @@ export default function Search() {
             </Box>
             <Box direction="row" pad="xsmall">
               <Box flex={{ grow: 0 }} width="320px" height="300px">
+                <Heading size="xxsmall">Studienphase</Heading>
+                <RefinementList attribute="studyPhase" />
                 <Heading size="xxsmall">Lernformat</Heading>
                 <RefinementList attribute="learningFormat" />
                 <Heading size="xxsmall">Subject</Heading>
@@ -50,6 +53,23 @@ export default function Search() {
     </Layout>
   )
 }
+
+const CustomRefinementList = connectRefinementList(props => (
+  <Box direction="row" wrap>
+    {props.items.map(item => (
+      <Box width="320px" key={item.label}>
+        <CheckBox
+          checked={item.isRefined}
+          label={item.label + " (" + item.count + ")"}
+          onChange={event => {
+            event.preventDefault()
+            props.refine(item.value)
+          }}
+        />
+      </Box>
+    ))}
+  </Box>
+))
 
 function Hit(props) {
   return (
