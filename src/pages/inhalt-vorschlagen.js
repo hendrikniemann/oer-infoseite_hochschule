@@ -14,6 +14,7 @@ import Layout from "../components/layout.js"
 import SEO from "../components/seo"
 
 const subjectAreaOptions = ["Informatik", "Mathematik"]
+const studyPhaseOptions = ["Brückenkurs", "Bachelor", "Master"]
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -35,7 +36,6 @@ const MyMultiSelect = ({ label, options, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and also replace ErrorMessage entirely.
   const [field, meta] = useField(props)
-  console.log(field)
   return (
     <>
       <FieldArray
@@ -66,55 +66,94 @@ const MyMultiSelect = ({ label, options, ...props }) => {
   )
 }
 
+const MainDataForm = ({ setMainData }) => {
+  return (
+    <Formik
+      initialValues={{
+        title: "",
+        subjectAreas: [],
+        link: "http://test.de",
+      }}
+      validationSchema={Yup.object().shape({
+        title: Yup.string()
+          .min(3, "Der Titel muss wenigstens drei Zeichen lang sein.")
+          .required("Der Titel muss angegeben werden."),
+        subjectAreas: Yup.array()
+          .of(Yup.mixed().oneOf(subjectAreaOptions))
+          .min(1, "Es muss mindestens ein Fachgebiet ausgewählt werden.")
+          .required("Das Fachgebiet muss angegeben werden"),
+        link: Yup.string()
+          .url("Link muss eine gültige URL sein")
+          .required("Der Link muss angegeben werden"),
+      })}
+      onSubmit={values => {
+        console.log(values)
+        setMainData(values)
+      }}
+    >
+      <Form>
+        <MyTextInput
+          name="title"
+          label="Der Titel des Inhalts ist:"
+          required={true}
+        />
+        <MyMultiSelect
+          name="subjectAreas"
+          label="Das Fachgebiet des Inhalts ist:"
+          options={subjectAreaOptions}
+        />
+        <MyTextInput
+          name="link"
+          label="Der Link zum Inhalt ist:"
+          required={true}
+        />
+        <Button type="submit" label="Detailangaben" primary={true} />
+      </Form>
+    </Formik>
+  )
+}
+
+const DetailDataForm = ({ mainData }) => {
+  return (
+    <Formik
+      initialValues={{
+        studyPhases: [],
+      }}
+      validationSchema={Yup.object().shape({
+        studyPhases: Yup.array()
+          .of(Yup.mixed().oneOf(studyPhaseOptions))
+          .min(1, "Es muss mindestens eine Studienphase ausgewählt werden.")
+          .required("Die Studienphase muss angegeben werden"),
+      })}
+      onSubmit={values => {
+        const result = Object.assign(mainData, values)
+        console.log(result)
+      }}
+    >
+      <Form>
+        <MyMultiSelect
+          name="studyPhases"
+          label="Studienphase"
+          options={studyPhaseOptions}
+        />
+        <Button type="submit" label="Einreichen" primary={true} />
+      </Form>
+    </Formik>
+  )
+}
+
 const Suggest = () => {
+  const [mainData, setMainData] = React.useState(null)
+
   return (
     <Layout>
       <SEO title="Inhalt vorschlagen" />
       <Heading>Inhalt vorschlagen</Heading>
-      <Formik
-        initialValues={{
-          title: "",
-          subjectAreas: [],
-        }}
-        validationSchema={Yup.object().shape({
-          title: Yup.string()
-            .min(3, "Der Titel muss wenigstens drei Zeichen lang sein.")
-            .required("Der Titel muss angegeben werden."),
-          subjectAreas: Yup.array()
-            .of(Yup.mixed().oneOf(subjectAreaOptions))
-            .min(1, "Es muss mindestens ein Fachgebiet ausgewählt werden.")
-            .required("Das Fachgebiet muss angegeben werden"),
-          link: Yup.string()
-            .url("Link muss eine gültige URL sein")
-            .required("Der Link muss angegeben werden"),
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values)
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-          }, 400)
-        }}
-      >
-        <Form>
-          <MyTextInput
-            name="title"
-            label="Der Titel des Inhalts ist:"
-            required={true}
-          />
-          <MyMultiSelect
-            name="subjectAreas"
-            label="Das Fachgebiet des Inhalts ist:"
-            options={subjectAreaOptions}
-          />
-          <MyTextInput
-            name="link"
-            label="Der Link zum Inhalt ist:"
-            required={true}
-          />
-          <Button type="submit" label="Vorschlagen" primary={true} />
-        </Form>
-      </Formik>
+      {mainData === null ? (
+        <MainDataForm setMainData={setMainData} />
+      ) : (
+        <DetailDataForm mainData={mainData} />
+      )}
     </Layout>
   )
 }
