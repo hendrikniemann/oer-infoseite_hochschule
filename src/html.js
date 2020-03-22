@@ -17,6 +17,7 @@ export default function HTML(props) {
           integrity="sha256-HB49n/BZjuqiCtQQf49OdZn63XuKFaxcIHWf0HNKte8="
           crossorigin="anonymous"
         />
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

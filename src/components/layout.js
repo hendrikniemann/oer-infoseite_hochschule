@@ -11,6 +11,32 @@ const Wrapper = styled(Box)`
   min-height: 100vh;
 `
 
+const theme = {
+  global: {
+    font: {
+      family: "Roboto",
+    },
+    colors: {
+      brand: "#003C42",
+      "accent-1": "#A2E3F1",
+      text: {
+        light: "#003C42",
+        dark: "#E1D1BA",
+      },
+    },
+  },
+  botton: {
+    colors: {
+      brand: "#003C42",
+    },
+  },
+  heading: {
+    font: {
+      family: "Roboto Slab",
+    },
+  },
+}
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -23,7 +49,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <Grommet>
+    <Grommet theme={theme}>
       <Wrapper direction="column" justify="between">
         <Box grow="grow">
           <Header />

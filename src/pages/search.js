@@ -7,6 +7,7 @@ import {
   SearchBox,
   connectRefinementList,
   connectHits,
+  connectCurrentRefinements,
 } from "react-instantsearch-dom"
 import algoliasearch from "algoliasearch/lite"
 import Layout from "../components/layout"
@@ -24,19 +25,30 @@ export default function Search() {
       <Main>
         <InstantSearch indexName="offers" searchClient={searchClient}>
           <div hidden={!isFirstPage}>
-            <Box pad="small" direction="row" justify="center">
-              <MaxWidth>
-                <Heading size="small">Mein Fachgebiet ist:</Heading>
-                <CustomRefinementList attribute="subjectArea" />
-                <Heading size="small">Und ich interessiere mich für:</Heading>
-                <Box direction="row-reverse">
-                  <Button
-                    primary
-                    onClick={() => setIsFirstPage(false)}
-                    fill={false}
-                  >
-                    alle Ressourcen
-                  </Button>
+            <Box background="accent-1" height="140px">
+              <Box height="100px" justify="center">
+                <Text textAlign="center">
+                  Digitale Hochschulbildung - finde dein passendes Lernangebot
+                </Text>
+              </Box>
+            </Box>
+            <Box align="center">
+              <MaxWidth
+                maxWidth={800}
+                pad="medium"
+                direction="row"
+                justify="center"
+                background="white"
+                margin={{ top: "-40px" }}
+              >
+                <Box>
+                  <Heading size="small">Mein Fachgebiet ist:</Heading>
+                  <CustomRefinementList attribute="subjectArea" />
+                  <Heading size="small">Und ich interessiere mich für:</Heading>
+                  <CustomRefinementList attribute="tags" />
+                  <Box direction="row-reverse">
+                    <NextButton onClick={() => setIsFirstPage(false)} />
+                  </Box>
                 </Box>
               </MaxWidth>
             </Box>
@@ -68,7 +80,7 @@ export default function Search() {
                   size="xxsmall"
                   margin={{ top: "small", bottom: "xsmall" }}
                 >
-                  Subject
+                  Fachgebiet
                 </Heading>
                 <RefinementList attribute="subjectArea" />
               </Box>
@@ -87,7 +99,7 @@ export default function Search() {
 }
 
 const CustomRefinementList = connectRefinementList(props => (
-  <Box direction="row" wrap>
+  <Box direction="row" wrap pad={{ horizontal: "large", vertical: "medium" }}>
     {[...props.items]
       .sort((a, b) => (b.label < a.label ? 1 : -1))
       .map(item => (
@@ -126,3 +138,13 @@ function Hit(props) {
     </Box>
   )
 }
+
+// Hack to know if there are current filters
+const NextButton = connectCurrentRefinements(props => (
+  <Button
+    primary
+    onClick={props.onClick}
+    color="brand"
+    label={props.items.length > 0 ? "Los geht's" : "Alle Ressourcen"}
+  />
+))
