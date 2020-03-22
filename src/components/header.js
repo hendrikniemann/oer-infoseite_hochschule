@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import { MaxWidth } from "./util"
 import logo from "../images/logo.svg"
-import laptopSrc from "../images/laptop.png"
+import laptopSrc from "../images/Laptop.png"
 import stiftSrc from "../images/Stift.png"
 
 const HeaderBox = styled(Header$)`
