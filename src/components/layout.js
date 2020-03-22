@@ -1,7 +1,8 @@
 import React from "react"
+import { PoweredBy } from "react-instantsearch-dom"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import { Grommet, Footer, Box } from "grommet"
+import { useStaticQuery, graphql, Link } from "gatsby"
+import { Grommet, Footer as Footer$, Box } from "grommet"
 import { Reset } from "styled-reset"
 import styled from "styled-components"
 
@@ -37,6 +38,13 @@ const theme = {
   },
 }
 
+const FooterBox =styled(Footer$)`
+  display: flex;
+  fontFamily: "Roboto";
+  fontSize: "18px";
+  fontColor: "#003C42";
+`
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -56,7 +64,22 @@ const Layout = ({ children }) => {
           <Reset />
           {children}
         </Box>
-        <Footer background="brand">Hello</Footer>
+        <FooterBox background="rgba(162, 227, 241, 0.76)">
+          <Box  style={{ marginLeft: '156px',}}>
+            { /* <PoweredBy/> */ }
+          </Box>
+          <Box grow="grow" direction="row-reverse" style={{align: 'right', marginRight: '156px',}}>
+            <Box>
+              <Link to="/kontakt" style={{display: 'inline-block', margin: '0 1rem 0 0'}}>Kontakt</Link>
+            </Box>
+            <Box>
+              <Link to="/datenschutz" style={{display: 'inline-block', margin: '0 1rem 0 0'}}>Datenschutz</Link>
+            </Box>
+            <Box>
+              <Link to="/impressum" style={{display: 'inline-block', margin: '0 1rem 0 0'}}>Impressum</Link>
+            </Box>
+          </Box>
+        </FooterBox>
       </Wrapper>
     </Grommet>
   )
