@@ -26,11 +26,7 @@ export default function Home() {
         <InstantSearch indexName="offers" searchClient={searchClient}>
           <div hidden={!isFirstPage}>
             <Box background="accent-1" height="140px">
-              <Box height="100px" justify="center">
-                <Text textAlign="center">
-                  Digitale Hochschulbildung - finde dein passendes Lernangebot
-                </Text>
-              </Box>
+              <Box height="100px" justify="center" />
             </Box>
             <Box align="center">
               <MaxWidth
@@ -39,6 +35,7 @@ export default function Home() {
                 direction="row"
                 justify="center"
                 background="white"
+                style={{ borderRadius: 6 }}
                 margin={{ top: "-40px" }}
               >
                 <Box>
@@ -152,8 +149,10 @@ function Hit(props) {
 const NextButton = connectCurrentRefinements(props => (
   <Button
     primary
+    size="large"
     onClick={props.onClick}
     color="brand"
+    margin={{ top: "large" }}
     label={props.items.length > 0 ? "Los geht's" : "Alle Ressourcen"}
   />
 ))

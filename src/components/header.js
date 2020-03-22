@@ -18,11 +18,16 @@ export default function Header(props) {
         direction="row"
         style={{ width: "100%" }}
         justify="between"
-        height="150px"
-        pad="small"
+        height="273px"
+        pad={{ top: "large", horizontal: "small" }}
       >
-        <img src={logo} />
-        <Box grow="grow" direction="row-reverse" align="center">
+        <Box>
+          <img
+            src={logo}
+            style={{ width: 546, height: 173, backgroundSize: "546px 173px" }}
+          />
+        </Box>
+        <Box grow="grow" direction="row-reverse" align="center" height="40px">
           <Box>
             <Button
               primary
@@ -36,8 +41,7 @@ export default function Header(props) {
               to="/unsereQuellen"
               style={{
                 display: "inline-block",
-                margin: "0 1rem 0 0",
-                textDecoration: "none",
+                margin: "0 1.5rem 0 0",
               }}
             >
               Unsere Quellen
@@ -48,8 +52,7 @@ export default function Header(props) {
               to="/faq"
               style={{
                 display: "inline-block",
-                margin: "0 1rem 0 0",
-                textDecoration: "none",
+                margin: "0 1.5rem 0 0",
               }}
             >
               FAQ
@@ -60,8 +63,7 @@ export default function Header(props) {
               to="/about"
               style={{
                 display: "inline-block",
-                margin: "0 1rem 0 0",
-                textDecoration: "none",
+                margin: "0 1.5rem 0 0",
               }}
             >
               About
@@ -75,6 +77,7 @@ export default function Header(props) {
 
 const MenuLink = styled(Link)`
   color: ${props => props.theme.global.colors.text.light};
+  text-decoration: none;
 
   &:hover {
     color: ${props => props.theme.global.colors.text.light};

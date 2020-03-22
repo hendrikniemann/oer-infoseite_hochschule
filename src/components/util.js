@@ -6,5 +6,5 @@ export const MaxWidth = styled(Box)`
   max-width: ${props =>
     typeof props.maxWidth === "number"
       ? props.maxWidth + "px"
-      : props.maxWidth ?? "1024px"};
+      : props.maxWidth ?? "1200px"};
 `
