@@ -1,15 +1,11 @@
 import * as React from "react"
 import { Header as Header$, Box } from "grommet"
 import styled from "styled-components"
+import { MaxWidth } from "./util"
 
 const HeaderBox = styled(Header$)`
   display: flex;
   justify-content: center;
-`
-
-const MaxWidth = styled(Box)`
-  width: 100%;
-  max-width: 1024px !important;
 `
 
 export default function Header(props) {
