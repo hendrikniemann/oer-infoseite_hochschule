@@ -7,13 +7,12 @@ import logo from "../images/logo.svg"
 
 const HeaderBox = styled(Header$)`
   display: flex;
-  fontfamily: "Roboto";
   fontsize: "18px";
 `
 
 export default function Header(props) {
   return (
-    <HeaderBox background="accent-1" direction="row" justify="center">
+    <HeaderBox background="brand" direction="row" justify="center">
       <MaxWidth
         direction="row"
         style={{ width: "100%" }}
@@ -22,18 +21,21 @@ export default function Header(props) {
         pad={{ top: "large", horizontal: "small" }}
       >
         <Box>
-          <img
-            src={logo}
-            style={{ width: 546, height: 173, backgroundSize: "546px 173px" }}
-          />
+          <Link href="/">
+            <img
+              src={logo}
+              style={{ width: 546, height: 173, backgroundSize: "546px 173px" }}
+            />
+          </Link>
         </Box>
         <Box grow="grow" direction="row-reverse" align="center" height="40px">
           <Box>
             <Button
               primary
-              label="Inhalt Vorschlagen &#9002;"
-              color="#003C42"
+              label="Lernangebot Vorschlagen &#9002;"
+              color="accent-1"
               href="/inhalt-vorschlagen"
+              style={{ boxShadow: "0px 6px 18px rgba(0, 0, 0, 0.25)" }}
             />
           </Box>
           <Box>
@@ -54,11 +56,11 @@ export default function Header(props) {
 export const MenuLink = styled(Link)`
   display: inline-block;
   margin-right: 1.5em;
-  color: ${props => props.theme.global.colors.text.light};
+  color: ${props => props.theme.global.colors.text.dark};
   text-decoration: none;
 
   &:hover {
-    color: ${props => props.theme.global.colors.text.light};
+    color: ${props => props.theme.global.colors.text.dark};
     text-decoration: underline;
   }
 `

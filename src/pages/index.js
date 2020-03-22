@@ -27,7 +27,7 @@ export default function Home() {
       <Main>
         <InstantSearch indexName="offers" searchClient={searchClient}>
           <div hidden={!isFirstPage}>
-            <Box background="accent-1" height="140px">
+            <Box background="brand" height="140px">
               <Box height="100px" justify="center" />
             </Box>
             <Box align="center">
@@ -186,8 +186,9 @@ const NextButton = connectCurrentRefinements(props => (
     primary
     size="large"
     onClick={props.onClick}
-    color="brand"
+    color="accent-1"
     margin={{ top: "large" }}
+    style={{ boxShadow: "0px 6px 18px rgba(0, 0, 0, 0.25)" }}
     label={props.items.length > 0 ? "Los geht's" : "Alle Ressourcen"}
   />
 ))

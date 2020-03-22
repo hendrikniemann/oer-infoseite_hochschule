@@ -19,17 +19,12 @@ const theme = {
       family: "Roboto",
     },
     colors: {
-      brand: "#003C42",
-      "accent-1": "#A2E3F1",
+      brand: "#121E44",
+      "accent-1": "#A6FF7C",
       text: {
-        light: "#003C42",
-        dark: "#E1D1BA",
+        light: "#415163",
+        dark: "#FFFFFF",
       },
-    },
-  },
-  button: {
-    colors: {
-      brand: "#003C42",
     },
   },
   heading: {
@@ -43,10 +38,9 @@ const theme = {
 const FooterBox = styled(Footer$)`
   display: flex;
   fontsize: "18px";
-  fontcolor: "#003C42";
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, resetFormState }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -65,7 +59,7 @@ const Layout = ({ children }) => {
           <Reset />
           {children}
         </Box>
-        <FooterBox background="accent-1">
+        <FooterBox background="brand">
           <MaxWidth
             grow="grow"
             direction="row-reverse"
