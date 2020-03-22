@@ -38,6 +38,7 @@ export default function Header(props) {
                 display: "inline-block",
                 margin: "0 1rem 0 0",
                 textDecoration: "none",
+                color: "#003C42",
               }}
             >
               Unsere Quellen

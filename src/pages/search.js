@@ -22,77 +22,88 @@ export default function Search() {
   const [isFirstPage, setIsFirstPage] = React.useState(true)
   return (
     <Layout>
-      <Main>
-        <InstantSearch indexName="offers" searchClient={searchClient}>
-          <div hidden={!isFirstPage}>
-            <Box background="accent-1" height="140px">
-              <Box height="100px" justify="center">
-                <Text textAlign="center">
-                  Digitale Hochschulbildung - finde dein passendes Lernangebot
-                </Text>
-              </Box>
-            </Box>
-            <Box align="center">
-              <MaxWidth
-                maxWidth={800}
-                pad="medium"
-                direction="row"
-                justify="center"
-                background="white"
-                margin={{ top: "-40px" }}
-              >
-                <Box>
-                  <Heading size="small">Mein Fachgebiet ist:</Heading>
-                  <CustomRefinementList attribute="subjectArea" />
-                  <Heading size="small">Und ich interessiere mich für:</Heading>
-                  <CustomRefinementList attribute="tags" />
-                  <Box direction="row-reverse">
-                    <NextButton onClick={() => setIsFirstPage(false)} />
-                  </Box>
+      <Main direction="row" justify="center">
+        <MaxWidth>
+          <InstantSearch indexName="offers" searchClient={searchClient}>
+            <div hidden={!isFirstPage}>
+              <Box background="accent-1" height="140px">
+                <Box height="100px" justify="center">
+                  <Text textAlign="center">
+                    Digitale Hochschulbildung - finde dein passendes Lernangebot
+                  </Text>
                 </Box>
-              </MaxWidth>
-            </Box>
-          </div>
-          <div hidden={isFirstPage}>
-            <Box direction="row" pad="xsmall">
-              <Box
-                flex={{ grow: 0 }}
-                width="320px"
-                direction="column"
-                pad="xsmall"
-              >
-                <SearchBox attribute="Title" />
-                <Heading
-                  size="xxsmall"
-                  margin={{ top: "small", bottom: "xsmall" }}
-                >
-                  Studienphase
-                </Heading>
-                <RefinementList attribute="studyPhase" />
-                <Heading
-                  size="xxsmall"
-                  margin={{ top: "small", bottom: "xsmall" }}
-                >
-                  Lernformat
-                </Heading>
-                <RefinementList attribute="learningFormat" />
-                <Heading
-                  size="xxsmall"
-                  margin={{ top: "small", bottom: "xsmall" }}
-                >
-                  Fachgebiet
-                </Heading>
-                <RefinementList attribute="subjectArea" />
               </Box>
-              <Box flex={{ grow: 1 }} width="400px">
-                <Heading margin="xsmall" size="small">
-                  Ergebnisse
-                </Heading>
-                <CustomHits hitComponent={Hit} />
+              <Box align="center">
+                <MaxWidth
+                  maxWidth={800}
+                  pad="medium"
+                  direction="row"
+                  justify="center"
+                  background="white"
+                  margin={{ top: "-40px" }}
+                >
+                  <Box>
+                    <Heading size="small">Mein Fachgebiet ist:</Heading>
+                    <CustomRefinementList attribute="subjectArea" />
+                    <Heading size="small">
+                      Und ich interessiere mich für:
+                    </Heading>
+                    <CustomRefinementList attribute="tags" />
+                    <Box direction="row-reverse">
+                      <NextButton onClick={() => setIsFirstPage(false)} />
+                    </Box>
+                  </Box>
+                </MaxWidth>
               </Box>
-            </Box>
-          </div>
-        </InstantSearch>
+            </div>
+            <div hidden={isFirstPage}>
+              <Box direction="row" pad="xsmall">
+                <Box
+                  flex={{ grow: 0 }}
+                  width="320px"
+                  direction="column"
+                  pad="xsmall"
+                >
+                  <SearchBox attribute="Title" />
+                  <Heading
+                    size="xxsmall"
+                    margin={{ top: "small", bottom: "xsmall" }}
+                  >
+                    Studienphase
+                  </Heading>
+                  <RefinementList attribute="studyPhase" />
+                  <Heading
+                    size="xxsmall"
+                    margin={{ top: "small", bottom: "xsmall" }}
+                  >
+                    Lernformat
+                  </Heading>
+                  <RefinementList attribute="learningFormat" />
+                  <Heading
+                    size="xxsmall"
+                    margin={{ top: "small", bottom: "xsmall" }}
+                  >
+                    Fachgebiet
+                  </Heading>
+                  <RefinementList attribute="subjectArea" />
+                  <Heading
+                    size="xxsmall"
+                    margin={{ top: "small", bottom: "xsmall" }}
+                  >
+                    Medium
+                  </Heading>
+                  <RefinementList attribute="media" />
+                </Box>
+                <Box flex={{ grow: 1 }} width="400px">
+                  <Heading margin="xsmall" size="small">
+                    Ergebnisse
+                  </Heading>
+                  <CustomHits hitComponent={Hit} />
+                </Box>
+              </Box>
+            </div>
+          </InstantSearch>
+        </MaxWidth>
       </Main>
     </Layout>
   )
