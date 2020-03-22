@@ -68,7 +68,7 @@ export default function Header(props) {
               />
             </Box>
             <Box>
-              <MenuLink to="/unsereQuellen">Unsere Quellen</MenuLink>
+              <MenuLink to="/unsere-quellen">Unsere Quellen</MenuLink>
             </Box>
             <Box>
               <MenuLink to="/faq">FAQ</MenuLink>
