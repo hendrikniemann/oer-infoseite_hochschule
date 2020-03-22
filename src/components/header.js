@@ -33,7 +33,7 @@ export default function Header(props) {
               primary
               label="Inhalt Vorschlagen &#9002;"
               color="#003C42"
-              href="/inhaltVorschlagen"
+              href="/inhalt-vorschlagen"
             />
           </Box>
           <Box>
