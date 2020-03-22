@@ -3,7 +3,6 @@ import { Box, Heading, Main, Text, Button, CheckBox } from "grommet"
 import {
   RefinementList,
   InstantSearch,
-  Hits,
   SearchBox,
   connectRefinementList,
   connectHits,
@@ -14,6 +13,7 @@ import Layout from "../components/layout"
 import { MaxWidth } from "../components/util"
 import formatDistanceStrict from "date-fns/formatDistanceStrict"
 import de from "date-fns/locale/de"
+import { PoweredBy } from "react-instantsearch-dom"
 
 const searchClient = algoliasearch(
   "8U7CL41ANW",
@@ -87,6 +87,7 @@ export default function Home() {
                   </Heading>
                   <RefinementList attribute="media" />
                   <ClearButton onClick={() => setIsFirstPage(true)} />
+                  <PoweredBy />
                 </Box>
                 <Box flex={{ grow: 1 }} width="400px">
                   <Heading margin="xsmall" size="small">
@@ -224,11 +225,11 @@ const ClearButton = connectCurrentRefinements(props => (
     primary
     size="small"
     onClick={e => {
-      props.refine()
+      props.refine([])
       props.onClick(e)
     }}
     color="brand"
-    margin={{ top: "large" }}
+    margin={{ vertical: "medium" }}
     style={{ boxShadow: "0px 3px 9px rgba(0, 0, 0, 0.25)" }}
     label="Filter löschen"
     disabled={props.items.length === 0}
