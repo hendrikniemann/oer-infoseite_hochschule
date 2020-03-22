@@ -84,6 +84,9 @@ const Suggest = () => {
             .of(Yup.mixed().oneOf(subjectAreaOptions))
             .min(1, "Es muss mindestens ein Fachgebiet ausgewählt werden.")
             .required("Das Fachgebiet muss angegeben werden"),
+          link: Yup.string()
+            .url("Link muss eine gültige URL sein")
+            .required("Der Link muss angegeben werden"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values)
@@ -94,11 +97,20 @@ const Suggest = () => {
         }}
       >
         <Form>
-          <MyTextInput name="title" label="Titel" required={true} />
+          <MyTextInput
+            name="title"
+            label="Der Titel des Inhalts ist:"
+            required={true}
+          />
           <MyMultiSelect
             name="subjectAreas"
-            label="Fachgebiete"
+            label="Das Fachgebiet des Inhalts ist:"
             options={subjectAreaOptions}
+          />
+          <MyTextInput
+            name="link"
+            label="Der Link zum Inhalt ist:"
+            required={true}
           />
           <Button type="submit" label="Vorschlagen" primary={true} />
         </Form>
