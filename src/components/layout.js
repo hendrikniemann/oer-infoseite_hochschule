@@ -1,6 +1,5 @@
 import React from "react"
 import { PoweredBy } from "react-instantsearch-dom"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { Grommet, Footer as Footer$, Box } from "grommet"
 import { Reset } from "styled-reset"
@@ -40,7 +39,7 @@ const FooterBox = styled(Footer$)`
   fontsize: "18px";
 `
 
-const Layout = ({ children, resetFormState }) => {
+const Layout = ({ children, largeHeader }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -53,13 +52,13 @@ const Layout = ({ children, resetFormState }) => {
 
   return (
     <Grommet theme={theme}>
+      <Reset />
       <Wrapper direction="column" justify="between">
         <Box grow="grow">
-          <Header />
-          <Reset />
+          <Header largeHeader={largeHeader} />
           {children}
         </Box>
-        <FooterBox background="brand">
+        <FooterBox background="brand" direction="row" justify="center">
           <MaxWidth
             grow="grow"
             direction="row-reverse"

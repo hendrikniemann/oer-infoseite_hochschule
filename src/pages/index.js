@@ -23,13 +23,10 @@ const searchClient = algoliasearch(
 export default function Home() {
   const [isFirstPage, setIsFirstPage] = React.useState(true)
   return (
-    <Layout>
-      <Main>
+    <Layout largeHeader>
+      <Main style={{ transform: "translateY(-40px)" }}>
         <InstantSearch indexName="offers" searchClient={searchClient}>
           <div hidden={!isFirstPage}>
-            <Box background="brand" height="140px">
-              <Box height="100px" justify="center" />
-            </Box>
             <Box align="center">
               <MaxWidth
                 maxWidth={800}
@@ -38,7 +35,6 @@ export default function Home() {
                 justify="center"
                 background="white"
                 style={{ borderRadius: 6 }}
-                margin={{ top: "-40px" }}
               >
                 <Box>
                   <Heading size="small">Mein Fachgebiet ist:</Heading>
@@ -53,7 +49,7 @@ export default function Home() {
             </Box>
           </div>
           <div hidden={isFirstPage}>
-            <Box direction="row" justify="center">
+            <Box direction="row" justify="center" pad={{ top: "large" }}>
               <MaxWidth direction="row" pad="xsmall">
                 <Box
                   flex={{ grow: 0 }}
@@ -90,6 +86,7 @@ export default function Home() {
                     Medium
                   </Heading>
                   <RefinementList attribute="media" />
+                  <ClearButton onClick={() => setIsFirstPage(true)} />
                 </Box>
                 <Box flex={{ grow: 1 }} width="400px">
                   <Heading margin="xsmall" size="small">
@@ -137,21 +134,50 @@ function Hit(props) {
   return (
     <Box
       grow
-      width="300px"
+      width="350px"
       border="all"
       margin="xsmall"
       pad="small"
-      height="200px"
+      height="250px"
       justify="between"
+      style={{ borderRadius: 4 }}
     >
       <Box>
         <Text size="xsmall">
           {props.hit.subjectArea} - {props.hit.studyPhase}
         </Text>
-        <Text size="large">{props.hit.title}</Text>
+        <Box direction="row" margin={{ top: "small" }} justify="between">
+          <Box width="24px" margin={{ right: 10 }}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM12 18.72L17 15.99V12.27L12 15L7 12.27V15.99L12 18.72Z"
+                fill="#121E44"
+              />
+            </svg>
+          </Box>
+          <Box width="290px">
+            <Text size="large">{props.hit.title}</Text>
+            <Text size="xsmall">{props.hit.media}</Text>
+          </Box>
+        </Box>
       </Box>
       <Box direction="row-reverse" justify="between">
-        <Button target="_blank" href={props.hit.link} primary label="Details" />
+        <Button
+          target="_blank"
+          href={props.hit.link}
+          primary
+          label="Details"
+          color="accent-1"
+          style={{ boxShadow: "0px 3px 9px rgba(0, 0, 0, 0.25)" }}
+        />
         {props.hit.workload ? (
           <Box direction="row" align="center">
             <svg
@@ -188,7 +214,23 @@ const NextButton = connectCurrentRefinements(props => (
     onClick={props.onClick}
     color="accent-1"
     margin={{ top: "large" }}
-    style={{ boxShadow: "0px 6px 18px rgba(0, 0, 0, 0.25)" }}
+    style={{ boxShadow: "0px 3px 9px rgba(0, 0, 0, 0.25)" }}
     label={props.items.length > 0 ? "Los geht's" : "Alle Ressourcen"}
+  />
+))
+
+const ClearButton = connectCurrentRefinements(props => (
+  <Button
+    primary
+    size="small"
+    onClick={e => {
+      props.refine()
+      props.onClick(e)
+    }}
+    color="brand"
+    margin={{ top: "large" }}
+    style={{ boxShadow: "0px 3px 9px rgba(0, 0, 0, 0.25)" }}
+    label="Filter löschen"
+    disabled={props.items.length === 0}
   />
 ))
