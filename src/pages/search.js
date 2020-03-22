@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Box, Heading } from "grommet"
+import { Box, Heading, Main, Grid } from "grommet"
 import {
   RefinementList,
   InstantSearch,
@@ -17,15 +17,25 @@ const searchClient = algoliasearch(
 export default function Search() {
   return (
     <Layout>
-      <InstantSearch indexName="offers" searchClient={searchClient}>
-        <SearchBox attribute="Title" />
-        <Heading>Mein Fachgebiet ist:</Heading>
-        <RefinementList attribute="Fachgebiet (Stichpunkte, nicht Fächer)" />
-
-        <Heading>Und ich interessiere mich für:</Heading>
-        <Heading>Mein Kurs-Niveau ist:</Heading>
-        <Hits />
-      </InstantSearch>
+      <Main>
+        <InstantSearch indexName="offers" searchClient={searchClient}>
+          <Box>
+            <SearchBox attribute="Title" />
+          </Box>
+          <Box direction="row" pad="xsmall">
+            <Box flex={{ grow: 0 }} width="250px" height="300px">
+              <RefinementList attribute="Fachgebiet (Stichpunkte, nicht Fächer)" />
+              {/* <Heading>Mein Fachgebiet ist:</Heading>
+              <Heading>Und ich interessiere mich für:</Heading>
+              <Heading>Mein Kurs-Niveau ist:</Heading> */}
+            </Box>
+            <Box flex={{ grow: 1 }} pad="xxsmall" width="400px">
+              <Heading size="small">Ergebnisse</Heading>
+              <Hits />
+            </Box>
+          </Box>
+        </InstantSearch>
+      </Main>
     </Layout>
   )
 }
