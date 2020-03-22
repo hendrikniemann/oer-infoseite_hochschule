@@ -12,6 +12,8 @@ import {
 import algoliasearch from "algoliasearch/lite"
 import Layout from "../components/layout"
 import { MaxWidth } from "../components/util"
+import formatDistanceStrict from "date-fns/formatDistanceStrict"
+import de from "date-fns/locale/de"
 
 const searchClient = algoliasearch(
   "8U7CL41ANW",
@@ -133,14 +135,47 @@ const CustomHits = connectHits(props => (
 
 function Hit(props) {
   return (
-    <Box grow="grow" width="400px" border="all" margin="xsmall" pad="small">
-      <Text size="xxxsmall">
-        {props.hit.subjectArea} - {props.hit.studyPhase}
-      </Text>
+    <Box
+      grow
+      width="300px"
+      border="all"
+      margin="xsmall"
+      pad="small"
+      height="200px"
+      justify="between"
+    >
       <Box>
-        <Heading size="xxsmall">{props.hit.title}</Heading>
+        <Text size="xsmall">
+          {props.hit.subjectArea} - {props.hit.studyPhase}
+        </Text>
+        <Text size="large">{props.hit.title}</Text>
       </Box>
-      <Box>{props.hit.workload}</Box>
+      <Box direction="row-reverse" justify="between">
+        <Button target="_blank" href={props.hit.link} primary label="Details" />
+        {props.hit.workload ? (
+          <Box direction="row" align="center">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.99 4C6.47 4 2 8.48 2 14C2 19.52 6.47 24 11.99 24C17.52 24 22 19.52 22 14C22 8.48 17.52 4 11.99 4ZM12 22C7.58 22 4 18.42 4 14C4 9.58 7.58 6 12 6C16.42 6 20 9.58 20 14C20 18.42 16.42 22 12 22ZM11 9H12.5V14.25L17 16.92L16.25 18.15L11 15V9Z"
+                fill="#003C42"
+              />
+            </svg>
+            <Text margin="xsmall">
+              {formatDistanceStrict(0, props.hit.workload * 1000, {
+                locale: de,
+              })}
+            </Text>
+          </Box>
+        ) : null}
+      </Box>
     </Box>
   )
 }

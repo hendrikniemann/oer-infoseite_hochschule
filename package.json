@@ -6,6 +6,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "algoliasearch": "^4.1.0",
+    "date-fns": "^2.11.0",
     "formik": "^2.1.4",
     "gatsby": "^2.19.45",
     "gatsby-image": "^2.2.44",
