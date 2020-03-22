@@ -32,20 +32,19 @@ export default function Header(props) {
             />
           </Box>
           <Box>
-            <Link
+            <MenuLink
               to="/unsereQuellen"
               style={{
                 display: "inline-block",
                 margin: "0 1rem 0 0",
                 textDecoration: "none",
-                color: "#003C42",
               }}
             >
               Unsere Quellen
-            </Link>
+            </MenuLink>
           </Box>
           <Box>
-            <Link
+            <MenuLink
               to="/faq"
               style={{
                 display: "inline-block",
@@ -54,10 +53,10 @@ export default function Header(props) {
               }}
             >
               FAQ
-            </Link>
+            </MenuLink>
           </Box>
           <Box>
-            <Link
+            <MenuLink
               to="/about"
               style={{
                 display: "inline-block",
@@ -66,10 +65,19 @@ export default function Header(props) {
               }}
             >
               About
-            </Link>
+            </MenuLink>
           </Box>
         </Box>
       </MaxWidth>
     </HeaderBox>
   )
 }
+
+const MenuLink = styled(Link)`
+  color: ${props => props.theme.global.colors.text.light};
+
+  &:hover {
+    color: ${props => props.theme.global.colors.text.light};
+    text-decoration: underline;
+  }
+`
