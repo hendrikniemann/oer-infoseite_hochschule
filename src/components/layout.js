@@ -6,7 +6,8 @@ import { Grommet, Footer as Footer$, Box } from "grommet"
 import { Reset } from "styled-reset"
 import styled from "styled-components"
 
-import Header from "./header.js"
+import Header, { MenuLink } from "./header.js"
+import { MaxWidth } from "./util.js"
 
 const Wrapper = styled(Box)`
   min-height: 100vh;
@@ -26,7 +27,7 @@ const theme = {
       },
     },
   },
-  botton: {
+  button: {
     colors: {
       brand: "#003C42",
     },
@@ -34,15 +35,15 @@ const theme = {
   heading: {
     font: {
       family: "Roboto Slab",
+      weight: "bold",
     },
   },
 }
 
-const FooterBox =styled(Footer$)`
+const FooterBox = styled(Footer$)`
   display: flex;
-  fontFamily: "Roboto";
-  fontSize: "18px";
-  fontColor: "#003C42";
+  fontsize: "18px";
+  fontcolor: "#003C42";
 `
 
 const Layout = ({ children }) => {
@@ -64,21 +65,16 @@ const Layout = ({ children }) => {
           <Reset />
           {children}
         </Box>
-        <FooterBox background="rgba(162, 227, 241, 0.76)">
-          <Box  style={{ marginLeft: '156px',}}>
-            { /* <PoweredBy/> */ }
-          </Box>
-          <Box grow="grow" direction="row-reverse" style={{align: 'right', marginRight: '156px',}}>
-            <Box>
-              <Link to="/kontakt" style={{display: 'inline-block', margin: '0 1rem 0 0'}}>Kontakt</Link>
-            </Box>
-            <Box>
-              <Link to="/datenschutz" style={{display: 'inline-block', margin: '0 1rem 0 0'}}>Datenschutz</Link>
-            </Box>
-            <Box>
-              <Link to="/impressum" style={{display: 'inline-block', margin: '0 1rem 0 0'}}>Impressum</Link>
-            </Box>
-          </Box>
+        <FooterBox background="accent-1">
+          <MaxWidth
+            grow="grow"
+            direction="row-reverse"
+            pad={{ vertical: "small" }}
+          >
+            <MenuLink to="/kontakt">Kontakt</MenuLink>
+            <MenuLink to="/datenschutz">Datenschutz</MenuLink>
+            <MenuLink to="/impressum">Impressum</MenuLink>
+          </MaxWidth>
         </FooterBox>
       </Wrapper>
     </Grommet>

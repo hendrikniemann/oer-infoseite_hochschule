@@ -37,37 +37,13 @@ export default function Header(props) {
             />
           </Box>
           <Box>
-            <MenuLink
-              to="/unsereQuellen"
-              style={{
-                display: "inline-block",
-                margin: "0 1.5rem 0 0",
-              }}
-            >
-              Unsere Quellen
-            </MenuLink>
+            <MenuLink to="/unsereQuellen">Unsere Quellen</MenuLink>
           </Box>
           <Box>
-            <MenuLink
-              to="/faq"
-              style={{
-                display: "inline-block",
-                margin: "0 1.5rem 0 0",
-              }}
-            >
-              FAQ
-            </MenuLink>
+            <MenuLink to="/faq">FAQ</MenuLink>
           </Box>
           <Box>
-            <MenuLink
-              to="/about"
-              style={{
-                display: "inline-block",
-                margin: "0 1.5rem 0 0",
-              }}
-            >
-              About
-            </MenuLink>
+            <MenuLink to="/about">About</MenuLink>
           </Box>
         </Box>
       </MaxWidth>
@@ -75,7 +51,9 @@ export default function Header(props) {
   )
 }
 
-const MenuLink = styled(Link)`
+export const MenuLink = styled(Link)`
+  display: inline-block;
+  margin-right: 1.5em;
   color: ${props => props.theme.global.colors.text.light};
   text-decoration: none;
 
