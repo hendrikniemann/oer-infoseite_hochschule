@@ -1,22 +1,26 @@
 import React from "react"
 import { Formik, Form, FieldArray, useField } from "formik"
 import * as Yup from "yup"
-import {
-  Heading,
-  Button,
-  CheckBox,
-  TextInput,
-  FormField,
-  RadioButtonGroup,
-  Select,
-  Box,
-} from "grommet"
+import styled from "styled-components"
+import { Heading, Button, CheckBox, TextInput, Box } from "grommet"
 import Layout from "../components/layout.js"
 import SEO from "../components/seo"
-import { MaxWidth } from "../components/util"
+import { MaxWidth, ErrorMessage } from "../components/util"
 
 const subjectAreaOptions = ["Informatik", "Mathematik"]
 const studyPhaseOptions = ["Brückenkurs", "Bachelor", "Master"]
+
+const Label = ({ children }) => {
+  return (
+    <Heading size="small" margin={{ bottom: "18px", top: "40px" }}>
+      {children}
+    </Heading>
+  )
+}
+
+const InputWrapper = styled.div`
+  padding-left: 80px;
+`
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -24,12 +28,14 @@ const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props)
   return (
     <>
-      <FormField label={label}>
+      <Label>{label}</Label>
+      <InputWrapper>
         <TextInput x {...field} {...props} />
-      </FormField>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
+
+        {meta.touched && meta.error ? (
+          <ErrorMessage>{meta.error}</ErrorMessage>
+        ) : null}
+      </InputWrapper>
     </>
   )
 }
@@ -43,26 +49,29 @@ const MyMultiSelect = ({ label, options, ...props }) => {
       <FieldArray
         name={props.name}
         render={arrayHelpers => (
-          <FormField label={label}>
-            {options.map(option => (
-              <CheckBox
-                label={option}
-                value={option}
-                checked={field.value.includes(option)}
-                onChange={e => {
-                  if (e.target.checked) arrayHelpers.push(option)
-                  else {
-                    const idx = field.value.indexOf(option)
-                    arrayHelpers.remove(idx)
-                  }
-                }}
-              />
-            ))}
-          </FormField>
+          <>
+            <Label size="small">{label}</Label>
+            <InputWrapper>
+              {options.map(option => (
+                <CheckBox
+                  label={option}
+                  value={option}
+                  checked={field.value.includes(option)}
+                  onChange={e => {
+                    if (e.target.checked) arrayHelpers.push(option)
+                    else {
+                      const idx = field.value.indexOf(option)
+                      arrayHelpers.remove(idx)
+                    }
+                  }}
+                />
+              ))}
+            </InputWrapper>
+          </>
         )}
       />
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+        <ErrorMessage>{meta.error}</ErrorMessage>
       ) : null}
     </>
   )
@@ -152,24 +161,23 @@ const Suggest = () => {
       <SEO title="Inhalt vorschlagen" />
       <Box align="center">
         <MaxWidth
-          maxWidth={800}
+          maxWidth={900}
           pad="medium"
-          direction="row"
-          justify="center"
+          direction="column"
+          justify="start"
           background="white"
           style={{ borderRadius: 6 }}
           margin={{ top: "-40px" }}
         >
-          <Box>
-            <Heading>Inhalt Vorschlagen</Heading>
-          </Box>
+          <Heading margin={{ bottom: "30px" }}>Lernangebot Vorschlagen</Heading>
+
+          {mainData === null ? (
+            <MainDataForm setMainData={setMainData} />
+          ) : (
+            <DetailDataForm mainData={mainData} />
+          )}
         </MaxWidth>
       </Box>
-      {mainData === null ? (
-        <MainDataForm setMainData={setMainData} />
-      ) : (
-        <DetailDataForm mainData={mainData} />
-      )}
     </Layout>
   )
 }
