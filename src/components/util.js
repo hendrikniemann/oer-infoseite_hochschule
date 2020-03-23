@@ -8,3 +8,9 @@ export const MaxWidth = styled(Box)`
       ? props.maxWidth + "px"
       : props.maxWidth ?? "1200px"};
 `
+export const ErrorMessage = styled.div`
+  padding: 8px;
+  margin: 10px 0;
+  color: red;
+  border: 1px solid red;
+`
