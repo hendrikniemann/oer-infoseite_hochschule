@@ -22,6 +22,7 @@ const theme = {
         light: "#415163",
         dark: "#FFFFFF",
       },
+      focus: "#A6FF7C",
     },
   },
   heading: {
